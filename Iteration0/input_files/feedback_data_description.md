@@ -1,0 +1,1 @@
+The dataset description does not appear to explain the observed issues. The analysis successfully identifies the dominance of structure suppression over thermal cooling, and the results are consistent with the provided HAYASHI framework and physical parameter mappings. No failures or ambiguities in the analysis are attributable to constraints in the dataset description.
