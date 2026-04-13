@@ -1,0 +1,68 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the hayashi_grid.json and hayashi_grid_summary.csv datasets.",
+                "Compute the fractional change in N_abs across the f_cool grid at fixed M_cut to verify the thermal saturation regime.",
+                "Print a detailed numerical table of N_abs values across all (z, f_cool, M_cut) combinations, including CDM baseline values and fractional suppressions.",
+                "Save the summary statistics and verification metrics to a CSV file for subsequent steps."
+            ],
+            "sub_task": "Baseline Calibration and Thermal Saturation Verification",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Generate a two-panel plot of N(>tau) curves: one panel for varying M_cut at fixed z and f_cool=1.0, and another for varying f_cool at fixed z and M_cut=0.",
+                "Visualize how structure suppression and cooling modify the cumulative absorber count.",
+                "Save the plots as high-resolution PNG files."
+            ],
+            "sub_task": "Visualization of the 21 cm Forest Signal",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the fractional change Delta N_abs/N_abs as a function of M_cut and f_cool for each redshift.",
+                "Define a physically motivated parametric model for nuisance parameters J_21 and x_HI_bar, and compute approximate analytic partial derivatives of the absorber distribution with respect to these parameters.",
+                "Quantify the degradation of the M_cut constraint due to these astrophysical degeneracies."
+            ],
+            "sub_task": "Sensitivity Quantification and Astrophysical Nuisance Modeling",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Construct a Fisher matrix for {M_cut, J_21, x_HI_bar} for each redshift slice, assuming N_sightlines = 10 and specified fiducial values/prior ranges for nuisance parameters.",
+                "Incorporate a visibility factor N_eff(z) to account for reionization patchiness and Poisson noise.",
+                "Compute the Fisher information content per tau-bin and derive an optimal weighting scheme for tau ranges to maximize the signal-to-noise ratio for M_cut.",
+                "Plot the marginalized uncertainty sigma(M_cut) as a function of z to identify the optimal observational window."
+            ],
+            "sub_task": "Redshift-Dependent Fisher Forecast and Optimal Window Identification",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Map the marginalized 1-sigma and 2-sigma confidence intervals of M_cut to the DM-baryon scattering cross-section sigma_0/m_chi for n=0 and n=-4 models.",
+                "Generate exclusion contour plots in the sigma_0/m_chi vs. m_chi plane, overplotting existing literature constraints from CMB and global 21 cm experiments as shaded regions."
+            ],
+            "sub_task": "Cross-Section Mapping and Exclusion Contours",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Interpret the quantitative results from the Fisher analysis and sensitivity mapping.",
+                "Quantitatively compare the structure suppression channel sensitivity versus the thermal channel sensitivity using the ratio of Fisher information and the ratio of fractional N_abs changes.",
+                "Discuss the unique complementarity of the 21 cm forest in probing the structure suppression channel."
+            ],
+            "sub_task": "Quantitative Comparative Analysis",
+            "sub_task_agent": "researcher"
+        },
+        {
+            "bullet_points": [
+                "Write the full Results section of the paper, incorporating all quantitative findings, interpretations of the plots, and key statistics.",
+                "Explicitly reference each figure by content description (e.g., \"the N(>tau) suppression figure,\" \"the sigma(M_cut) vs. z figure,\" \"the exclusion contour figure\").",
+                "Include all key numerical results, such as the optimal redshift, marginalized sigma(M_cut) values, and corresponding cross-section sensitivities, ensuring the Results section is self-contained."
+            ],
+            "sub_task": "Final Results Report",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
