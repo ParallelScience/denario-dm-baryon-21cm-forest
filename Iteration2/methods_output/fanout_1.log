@@ -1,0 +1,200 @@
+
+###### PROMPT BEGINS ########
+Human: You are provided with:
+- a description of the data
+- an idea
+- research plan to carry out the idea.
+
+Your task is to provide suggestions on how to improve the plan.
+Take into account and potential feedback (if any).
+If the plan is already good enough, do not give suggestions to improve it. If this is not first iteration, you will also be provided with the previous research plan along with some feedback on it. If this is the case, take into account the feedback provided when designing the new research plan. It is good to have a detailed plan, but not to have an overly complicated plan. If you dont have suggestions, just say that you dont have further suggestions. The idea should remain the same. No need to add code to the research plan, as another agent will write code given the research plan.
+
+Data description:
+
+# DM-Baryon Scattering and the 21 cm Forest: A Semianalytic Study
+
+## Scientific Context
+
+Dark matter–baryon scattering is a well-motivated extension of the standard cosmological model. If dark matter (DM) couples to baryons via a velocity-dependent or velocity-independent cross-section (parameterized as σ(v) = σ₀ v^n, with n=0 velocity-independent or n=-4 Coulomb-like), two physical effects modify the 21 cm forest:
+
+1. **Baryon cooling**: DM-baryon heat transfer reduces the IGM kinetic temperature T_k below the adiabatic value T_k^{ad}(z). This is parameterized here by the cooling fraction f_cool = T_k / T_k^{ad} ∈ (0, 1], where f_cool=1 corresponds to CDM (no interaction).
+
+2. **Structure suppression**: DM-baryon scattering suppresses small-scale power in the matter power spectrum, reducing minihalo abundance. This is parameterized by an effective half-mode mass cutoff M_cut [Solar masses], where M_cut=0 is CDM and M_cut > 0 represents a suppression of halos below M_cut following a transfer function T(M) = (1 + (M_cut/M)^1.5)^{-2}.
+
+The 21 cm forest refers to absorption lines in the spectra of high-redshift radio sources caused by intervening neutral hydrogen minihalos and the diffuse IGM during the Epoch of Reionization (z ~ 7–15). Each absorber produces an absorption trough at 21 cm rest frequency with optical depth τ. The key observable is the cumulative number of absorbers N(>τ) per unit redshift and per unit frequency.
+
+**Key literature context**: 
+- arXiv:2212.08409 (Shimabukuro et al. 2023): studied DM-baryon *streaming velocity* effect on 21 cm forest — NOTE: this is a kinematic effect different from our interaction cross-section effect.
+- arXiv:2505.03148 (Parashari et al. 2026): studied DM-baryon scattering in the *global* 21 cm signal — NOT the 21 cm forest.
+- arXiv:2209.01305 (Villanueva-Domingo et al. 2023): HAYASHI code paper, subhalo boosting of 21 cm forest.
+
+**The gap we fill**: No existing paper has computed the 21 cm forest absorption line statistics under DM-baryon interaction cross-sections using the semianalytic framework. This is the first such study.
+
+## Dataset Description
+
+### Computation Tool
+Computed using HAYASHI (v1.1.6), a Python semianalytic code for 21 cm forest calculations that integrates halo mass functions over mass and impact parameter. It includes host halo + subhalo contributions. GitHub: https://github.com/PabloVD/HAYASHI
+
+### File Inventory
+
+#### Primary data file (full grid):
+- **Path**: `/home/node/work/projects/dm_baryon_21cm_forest/data/hayashi_grid.json`
+- **Format**: JSON list of 180 dictionaries, one per grid point
+- **Size**: 180 records
+- **Fields per record**:
+  - `z` (float): Redshift. Values: [7.0, 8.0, 9.0, 10.0, 12.0, 15.0]
+  - `Tk_cdm` (float): Adiabatic IGM temperature in Kelvin (CDM baseline). Values: ~1.16 K (z=7) to ~4.63 K (z=15)
+  - `f_cool` (float): Cooling fraction T_k/T_k_CDM. Values: [1.0, 0.5, 0.2, 0.1, 0.05, 0.02]
+  - `Tk_dm` (float): Modified IGM temperature T_k_CDM * f_cool [K]
+  - `M_cut` (float): Structure suppression cutoff mass [Solar masses]. Values: [0, 1e4, 1e5, 5e5, 1e6]
+  - `Nabs_total` (float): Cumulative number of absorbers N(τ > τ_min=0.01) per unit redshift per line of sight [dimensionless]
+  - `tau_mean` (float): Mean optical depth of the absorber distribution [dimensionless]
+  - `tau_peak` (float): Modal optical depth of the absorber distribution [dimensionless]
+  - `cumulvec` (list of 200 floats): N(>τ) cumulative distribution as a function of τ
+  - `tau_arr` (list of 200 floats): Corresponding τ values (logarithmically spaced, ~0.001 to ~0.5)
+
+#### CSV summary (for easy analysis):
+- **Path**: `/home/node/work/projects/dm_baryon_21cm_forest/data/hayashi_grid_summary.csv`
+- **Format**: CSV with columns: z, Tk_cdm, f_cool, Tk_dm, M_cut, Nabs_total, tau_mean, tau_peak
+- **Size**: 180 rows + header
+
+#### N(>τ) distributions for z=10, M_cut=0 (pure cooling effect):
+- **Path**: `/home/node/work/projects/dm_baryon_21cm_forest/data/Ngtau_z10_Mcut0.npz`
+- **Format**: NumPy .npz archive
+- **Arrays**: For each cooling fraction value fcool ∈ {1.0, 0.5, 0.2, 0.1, 0.05, 0.02}:
+  - `fcool{X}_tau`: τ array (200 values, log-spaced)
+  - `fcool{X}_Ngtau`: N(>τ) array (200 values)
+
+### Key Physical Findings from the Dataset
+
+**Finding 1 — Structure suppression is dominant**: At all redshifts z=7–15, M_cut has a large effect on N_abs. Example at z=7: N_abs = 136 (CDM, M_cut=0) vs. 28 (M_cut=10^5 M_sun) vs. 10 (M_cut=10^6 M_sun). This is a factor of 3–14x suppression.
+
+**Finding 2 — Baryon cooling is negligible at z<15**: At z=7–15, reducing f_cool from 1.0 to 0.02 changes N_abs by <1%. This is because the adiabatic T_k is already near the floor (1–5 K), so further cooling has minimal effect on the 21 cm optical depth. The spin temperature coupling saturates in the cold IGM limit.
+
+**Finding 3 — Strong redshift dependence of structure suppression**: The ratio N_abs(M_cut=10^5)/N_abs(CDM) varies from ~20% at z=7 to ~14% at z=15, showing that structure suppression is more prominent at higher z (less structure formed, halos are closer to M_cut).
+
+**Finding 4 — Redshift evolution of baseline N_abs**: N_abs(CDM, M_cut=0) decreases from 136 at z=7 to 13 at z=15, reflecting the declining halo abundance at higher z.
+
+### Physical Mapping to DM-Baryon Parameters
+
+The M_cut parameter maps to physical DM-baryon scattering as follows (approximate, from literature):
+
+For velocity-independent cross-section (n=0):
+- M_cut ~ 10^4 M_sun → σ₀/m_χ ~ few × 10^{-25} cm²/GeV (mild scattering)
+- M_cut ~ 10^5 M_sun → σ₀/m_χ ~ 10^{-24} cm²/GeV (moderate scattering)
+- M_cut ~ 10^6 M_sun → σ₀/m_χ ~ 10^{-23} cm²/GeV (strong scattering)
+
+For Coulomb-like (n=-4), the mapping is more redshift-dependent due to the velocity-weighting.
+
+The cooling fraction f_cool maps to:
+- f_cool = 0.5 → σ₀/m_χ ~ 10^{-24} cm²/GeV (for light DM, m_χ ~ 0.1 GeV)
+- f_cool = 0.1 → σ₀/m_χ ~ 10^{-23} cm²/GeV
+
+## Analysis Tasks
+
+The analysis should:
+
+1. **Visualize the 21 cm forest signal**: Plot N(>τ) curves for different (z, f_cool, M_cut) combinations. Show how structure suppression and cooling modify the cumulative absorber count.
+
+2. **Quantify the sensitivity**: Compute the fractional change ΔN_abs/N_abs as a function of M_cut and f_cool, for each redshift. Show that structure suppression (M_cut) is the dominant effect, while cooling is subdominant.
+
+3. **Map to DM-baryon interaction parameters**: Using the physical mapping above, compute N_abs as a function of σ₀/m_χ for Coulomb-like and velocity-independent interactions. Derive sensitivity curves showing what cross-sections are detectable given a 10% or 20% change in N_abs (observationally motivated threshold).
+
+4. **Fisher forecast for SKA sensitivity**: Using a simplified Fisher analysis, estimate the sensitivity of SKA observations of N_abs (expected ~100 absorbers at z~7 for CDM) to M_cut and the corresponding DM-baryon cross-section. Assume Poisson noise: σ(N_abs) = sqrt(N_obs) where N_obs is the observed number, with N_sightlines ~ 10 background radio sources observable with SKA.
+
+5. **Compare with existing constraints**: Compare the sensitivity forecasts from the 21 cm forest with existing constraints on DM-baryon scattering from: CMB (Xu et al. 2018: σ₀ < 10^{-22} cm² for m_χ = 1 GeV for n=0), global 21 cm (EDGES/SARAS3: limits at ~10^{-21} cm² level), and Lyman-α forest.
+
+6. **Assess the novelty of structure suppression vs. cooling channels**: Quantitatively show that the 21 cm forest is unique in probing the structure suppression channel of DM-baryon scattering (complementary to the thermal channel probed by the global signal).
+
+7. **Redshift dependence**: Analyze how the constraints evolve with z, identifying the optimal redshift for constraining DM-baryon scattering (should be z ~ 10 where N_abs is intermediate but sensitivity to M_cut is high).
+
+## Notes for the Analyst
+
+- Load the CSV with: `pd.read_csv('/home/node/work/projects/dm_baryon_21cm_forest/data/hayashi_grid_summary.csv')`
+- Load the full JSON with: `json.load(open('/home/node/work/projects/dm_baryon_21cm_forest/data/hayashi_grid.json'))`
+- Load N(>τ) distributions with: `np.load('/home/node/work/projects/dm_baryon_21cm_forest/data/Ngtau_z10_Mcut0.npz')`
+- The `Nabs_total` column is already integrated over τ > 0.01.
+- The CDM baseline corresponds to f_cool=1.0, M_cut=0.
+- All HAYASHI computations include host halo + subhalo contributions (the subhalo boost from arXiv:2209.01305).
+
+
+Idea:
+**Title**: Optimal Redshift and Optical Depth Sensitivity Mapping for DM-Baryon Scattering in the 21 cm Forest
+
+**Description**: This study quantifies the sensitivity of the 21 cm forest to DM-baryon scattering by performing a derivative analysis of the cumulative optical depth distribution, $\partial N(>\tau) / \partial M_{cut}$, using the HAYASHI framework. We utilize the `cumulvec` data across $z=7–15$ to identify the specific $\tau$-bins that maximize the signal-to-noise ratio for detecting small-scale structure suppression. By mapping these sensitive bins to $\sigma_0/m_\chi$, we determine that $z \sim 10$ provides the optimal observational window where the cumulative suppression is most detectable against Poisson noise. We demonstrate that the sensitivity is driven by the depletion of low-mass minihalos, and we provide a optimized weighting scheme for SKA-era line-of-sight observations that prioritizes specific $\tau$ ranges to maximize constraints on the scattering cross-section. This approach moves beyond total absorber counts to establish a rigorous, data-driven observational strategy for distinguishing DM-baryon interaction models from CDM.
+
+Research plan:
+1. **Baseline Calibration and Thermal Coupling Verification**: Load the `hayashi_grid.json` and `hayashi_grid_summary.csv`. Calculate the spin temperature $T_s$ for the range of $M_{cut}$ and $f_{cool}$ values to verify the coupling coefficient $x_\alpha$. Specifically, quantify the deviation of $T_s$ from $T_k$ in the presence of strong structure suppression ($M_{cut} = 10^6 M_\odot$) to confirm that the thermal channel remains subdominant and that the $f_{cool}$ parameter can be safely marginalized or fixed without introducing significant bias in the $M_{cut}$ sensitivity analysis.
+
+2. **Subhalo Contribution and Systematic Assessment**: Analyze the ratio of subhalo-to-host halo contributions to $N_{abs}$ across the grid. Calculate the derivative of this ratio with respect to $M_{cut}$ to determine if the subhalo boost is suppressed uniformly or if tidal stripping effects introduce a non-linear dependence. Document this as a systematic uncertainty in the total $N_{abs}$ calculation, ensuring that the $M_{cut}$ transfer function is applied consistently to both host and subhalo populations.
+
+3. **Astrophysical Nuisance Parameter Modeling**: Define a two-parameter nuisance model: (1) the ionizing background intensity ($J_{21}$) and (2) the neutral fraction ($\bar{x}_{HI}(z)$). Use the grid to compute the partial derivatives $\partial (dN/d\tau) / \partial J_{21}$ and $\partial (dN/d\tau) / \partial \bar{x}_{HI}$. Perform a sensitivity test to determine the degree of orthogonality between these derivatives and $\partial (dN/d\tau) / \partial M_{cut}$ to assess potential degeneracies that could degrade the $M_{cut}$ constraint.
+
+4. **Redshift-Dependent Visibility and Fisher Forecast**: Construct a Fisher matrix $F_{ij}$ incorporating $M_{cut}$ and the nuisance parameters $\{J_{21}, \bar{x}_{HI}\}$. Incorporate a "visibility" factor $\bar{x}_{HI}(z)$ into the Poisson noise term $\sigma = \sqrt{N_{obs}(z, \bar{x}_{HI}) \cdot \Delta\tau}$, where $N_{obs}$ is scaled by the expected neutral fraction at each redshift. This ensures the forecast accounts for the physical disappearance of the 21 cm forest as reionization progresses.
+
+5. **Differential Sensitivity Mapping**: Convert the cumulative `cumulvec` into the differential distribution $dN/d\tau$. Compute the Fisher information content per $\tau$-bin. Identify the specific $\tau$ ranges where the signal-to-noise ratio for $M_{cut}$ is maximized, and develop a weighting scheme that prioritizes these bins to minimize the impact of the nuisance parameters identified in Step 3.
+
+6. **Cross-Section Mapping and Exclusion Contours**: Map the marginalized 1-$\sigma$ and 2-$\sigma$ confidence intervals of $M_{cut}$ to the DM-baryon scattering cross-section $\sigma_0/m_\chi$ for both $n=0$ and $n=-4$ models. Account for the $z$-dependent relative velocity in the $n=-4$ case. Generate exclusion contours in the $\sigma_0/m_\chi$ vs. $m_\chi$ plane, ensuring the mass-dependence of the cross-section is correctly normalized for comparison with existing CMB and Lyman-$\alpha$ constraints.
+
+7. **Optimal Window Identification**: Synthesize the Fisher results to define the "optimal observational window" by plotting the marginalized uncertainty $\sigma(M_{cut})$ as a function of $z$. Quantify the trade-off between the declining halo abundance at high $z$ and the increasing neutral fraction/visibility at lower $z$, identifying the specific redshift $z \sim 10$ as the target for future SKA-era observations.
+
+8. **Final Synthesis and Comparative Visualization**: Generate the final figures: (a) $dN/d\tau$ sensitivity plots showing the impact of $M_{cut}$ vs. nuisance parameter shifts; (b) the Fisher-forecasted exclusion region in the $\sigma_0/m_\chi$ parameter space; and (c) a summary plot demonstrating the unique complementarity of the 21 cm forest in probing the structure suppression channel compared to the thermal channel probed by global 21 cm signals.
+
+Previous research plan:
+1. **Baseline Validation and Saturation Limit Analysis**: Load the `hayashi_grid.json` and `hayashi_grid_summary.csv`. Validate the CDM baseline ($f_{cool}=1.0, M_{cut}=0$) against the provided dataset. Compute $dN/d\tau$ for the lowest available cooling fraction ($f_{cool}=0.02$) and compare it against the theoretical limit $f_{cool} \to 0$. Establish the "saturation limit" by confirming that $T_s \approx T_k \ll T_{CMB}$ at these redshifts, rendering the thermal channel negligible and justifying the exclusion of $f_{cool}$ as a free parameter in subsequent Fisher forecasts.
+
+2. **Nuisance Parameter Degeneracy Check**: Use the existing grid to perform a parameter degeneracy check between $M_{cut}$ and astrophysical uncertainties (e.g., ionizing background intensity or reionization state). Since the grid is pre-computed, use redshift $z$ as a proxy for the evolution of the reionization state. Quantify if the change in the shape of $dN/d\tau$ induced by $M_{cut}$ is distinct from the shifts caused by varying $z$. This establishes the robustness of the $M_{cut}$ signal against astrophysical nuisance parameters.
+
+3. **Redshift-Dependent Source Count Integration**: Define a reference radio source count model $N_{src}(z)$ based on SKA1-Low population models. If specific counts are unavailable, perform a sensitivity inversion to calculate the minimum number of radio sources required at each $z \in [7, 15]$ to maintain a constant signal-to-noise ratio for a fixed $M_{cut}$ threshold, providing an interpretable metric for future observational planning.
+
+4. **Differential Spectrum Fisher Forecast**: Convert the cumulative `cumulvec` into the differential distribution $dN/d\tau$. Construct the Fisher matrix $F_{ij} = \sum_{\tau} \frac{1}{\sigma^2} \frac{\partial (dN/d\tau)}{\partial \theta_i} \frac{\partial (dN/d\tau)}{\partial \theta_j}$, where $\theta = \{M_{cut}, \text{nuisance parameters}\}$. Incorporate Poisson noise $\sigma = \sqrt{N_{obs}(z) \cdot \Delta\tau}$ using the $N_{src}(z)$ model. Compute the 1-$\sigma$ and 2-$\sigma$ confidence intervals for $M_{cut}$ by marginalizing over nuisance parameters using the inverse Fisher matrix: $\sigma(M_{cut}) = \sqrt{(F^{-1})_{M_{cut}, M_{cut}}}$.
+
+5. **Cross-Section Mapping and Mass-Dependence**: Implement the physical mapping functions to convert $M_{cut}$ to $\sigma_0/m_\chi$. For $n=-4$ (Coulomb-like) interactions, incorporate the $z$-dependent relative velocity. Ensure all sensitivity plots use a consistent $m_\chi$ (e.g., 1 GeV) or include a note on the scaling used to compare with CMB and global 21 cm constraints, ensuring an "apples-to-apples" comparison.
+
+6. **Subhalo Systematic Assessment**: Review the HAYASHI subhalo boost model. Explicitly document that the suppression is applied to the total halo mass function (host + subhalo) and note that this is a conservative estimate. Distinguish between the "primordial" suppression of subhalos due to $M_{cut}$ and "environmental" suppression (tidal stripping), noting that the former acts before subhalo accretion, which validates the use of the $M_{cut}$ transfer function.
+
+7. **Optimization of Observational Strategy**: Synthesize results to identify the optimal redshift $z_{opt}$ for SKA observations. Develop a weighting scheme for $\tau$-bins that maximizes the Fisher information, prioritizing $\tau$ ranges where the derivative $\partial (dN/d\tau) / \partial M_{cut}$ is largest relative to the variance of the nuisance parameters.
+
+8. **Final Visualization and Synthesis**: Generate the final figures: (a) $dN/d\tau$ saturation plots; (b) Fisher-forecasted sensitivity contours in the $\sigma_0/m_\chi$ vs. $z$ plane, including $N_{src}(z)$ corrections; (c) a comparative plot of 21 cm forest sensitivity vs. existing CMB/Lyman-$\alpha$ constraints; and (d) a summary plot defining the "optimal observational window" for future radio surveys.
+
+Feedback on previous research plan:
+The current analysis provides a robust semianalytic foundation for using the 21 cm forest to constrain DM-baryon scattering. However, to elevate this from a sensitivity study to a rigorous scientific framework, the following critical gaps must be addressed:
+
+1. **Over-reliance on the "Saturation" Assumption**: The claim that the thermal channel is "negligible" because $T_s \approx T_k$ is physically sound, but the analysis assumes this holds across the entire parameter space of $M_{cut}$. You must verify if $T_s$ remains coupled to $T_k$ in the presence of strong structure suppression. If $M_{cut}$ significantly reduces the density of minihalos, the local Lyman-$\alpha$ flux or collisional coupling efficiency might change, potentially decoupling $T_s$ from $T_k$ and re-introducing thermal sensitivity. You should explicitly check the coupling coefficient $x_\alpha$ for the lowest-mass halos in your $M_{cut}$ scenarios.
+
+2. **Degeneracy with Astrophysical Nuisance Parameters**: While the Fisher forecast marginalizes over an "amplitude" parameter $A$, this is too simplistic. The 21 cm forest is highly sensitive to the ionizing background (UVB) and the timing of reionization. A change in the UVB intensity shifts the entire $dN/d\tau$ distribution, which may mimic the effect of $M_{cut}$. You must perform a sensitivity test: vary the ionizing background intensity by $\pm 20\%$ and determine if the resulting shift in $dN/d\tau$ is orthogonal to the shift induced by $M_{cut}$. If they are degenerate, the current constraints on $M_{cut}$ are over-optimistic.
+
+3. **Subhalo Boost Model Validity**: The HAYASHI framework includes subhalo contributions, but the current analysis treats $M_{cut}$ as a global suppression factor. You must clarify if the transfer function $T(M)$ is applied to the *host* halo mass function only, or if it also accounts for the suppression of subhalos *within* their hosts. If the latter, does the model account for the fact that subhalos are subject to tidal stripping? If the subhalo boost is a significant fraction of the total $N_{abs}$, the assumption that $M_{cut}$ acts uniformly on the total population may be flawed.
+
+4. **Refinement of the "Optimal Window"**: The identification of $z \sim 10$ as the "sweet spot" is compelling but currently lacks a quantitative assessment of the *observational* cost. You suggest $z \sim 10$ because it is "pre-reionization," but the 21 cm forest signal is inherently tied to the presence of neutral hydrogen. If reionization is patchy, the number of available sightlines will fluctuate significantly with $z$. You should incorporate a "visibility" factor into your Fisher forecast that accounts for the expected neutral fraction $\bar{x}_{HI}(z)$ at each redshift.
+
+5. **Actionable Next Steps**:
+   - **Sensitivity Test**: Re-run the Fisher matrix including a second nuisance parameter representing the ionizing background intensity to see how the $M_{cut}$ constraint degrades.
+   - **Consistency Check**: Plot the ratio of subhalo-to-host contributions as a function of $M_{cut}$. If this ratio changes significantly, the "shape" of the $dN/d\tau$ distribution is not just a function of $M_{cut}$ but also of the subhalo model, which could be a source of systematic error.
+   - **Comparison**: Instead of just comparing to CMB/Lyman-$\alpha$, explicitly plot the "exclusion region" in the $\sigma_0/m_\chi$ vs. $m_\chi$ plane to show where the 21 cm forest closes the parameter space that other probes cannot reach.
+
+
+Respond in this format:
+
+\\begin{SUGGESTIONS}
+<SUGGESTIONS>
+\\end{SUGGESTIONS}
+
+In <SUGGESTIONS> put the suggestions to improve the plan.
+
+###### PROMPT ENDS ########
+
+\begin{SUGGESTIONS}
+The updated research plan is well-structured and addresses the previous feedback effectively. I have only a few minor suggestions to further strengthen the rigor and clarity of the study:
+
+1. **Clarify the "Visibility" Factor in Step 4**: While you mention incorporating a visibility factor $\bar{x}_{HI}(z)$, ensure that the Fisher forecast explicitly accounts for the *patchiness* of reionization. Since the 21 cm forest is a line-of-sight measurement, the probability of intersecting a neutral region decreases as $\bar{x}_{HI}$ drops. You should define the effective number of observable sightlines $N_{eff}(z) = N_{total} \cdot \bar{x}_{HI}(z)$ to make the Poisson noise estimate more realistic for the late stages of reionization ($z \sim 7-8$).
+
+2. **Refine the Nuisance Parameter Orthogonality (Step 3)**: In your sensitivity test for $J_{21}$ and $\bar{x}_{HI}$, explicitly compute the "correlation coefficient" between the $M_{cut}$ parameter and the nuisance parameters within the Fisher matrix. This will provide a quantitative measure of how much the $M_{cut}$ constraint is degraded by astrophysical degeneracies, rather than just stating they are "orthogonal."
+
+3. **Subhalo Tidal Stripping (Step 2)**: Regarding the subhalo contribution, ensure the analysis distinguishes between the *primordial* suppression of subhalos (due to $M_{cut}$ affecting the initial power spectrum) and *environmental* suppression (tidal stripping). If the HAYASHI code treats these differently, explicitly mention that you are isolating the primordial effect to avoid overestimating the sensitivity of the 21 cm forest to DM-baryon scattering.
+
+4. **Consistency in Cross-Section Mapping (Step 6)**: When mapping to $\sigma_0/m_\chi$, ensure that the $n=-4$ (Coulomb) case uses the correct velocity-averaging prescription consistent with the literature (e.g., the relative velocity $v_{rel}$ between DM and baryons). Since $v_{rel}$ is redshift-dependent, ensure the mapping is performed at each $z$ individually before aggregating the Fisher information.
+
+The plan is otherwise comprehensive and ready for implementation.
+\end{SUGGESTIONS}
+
