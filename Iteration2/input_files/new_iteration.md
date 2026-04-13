@@ -1,0 +1,7 @@
+- Decision: ITERATE
+- Justification: The current results have successfully established the 21 cm forest as a superior probe for structure suppression ($M_{cut}$) compared to the thermal channel, which is a significant scientific finding. However, the "publishability delta" is currently limited by the potential for reviewer pushback regarding the degeneracy between $M_{cut}$ and astrophysical nuisance parameters ($J_{21}$, $\bar{x}_{HI}$). 
+
+The proposed changes are not merely "unnecessary complexity"; they address fundamental structural weaknesses in the Fisher forecast. Specifically:
+1. **Robustness**: Incorporating a realistic $N_{los}(z)$ (source density) is essential for a credible SKA-era forecast, as the current assumption of constant sightlines is physically unrealistic at $z > 8$.
+2. **Reviewer Confidence**: The "shape-based" discrimination between $M_{cut}$ and $J_{21}$ is the strongest argument for the paper's novelty. By demonstrating that $M_{cut}$ leaves a unique "fingerprint" in the $dN/d\tau$ distribution that $J_{21}$ cannot mimic, the paper moves from a "suggestive" study to a "definitive" observational strategy.
+3. **ROI**: The computational cost of re-running the Fisher analysis with these refinements is low compared to the high potential for publication in a top-tier journal (e.g., ApJ, PRD, or JCAP). The current results are "stable enough" to be correct, but the proposed iterations are necessary to make them "unassailable" against standard peer-review critiques regarding astrophysical degeneracies.
