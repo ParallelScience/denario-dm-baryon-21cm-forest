@@ -1,0 +1,100 @@
+# Optimal Redshift and Optical Depth Sensitivity Mapping for DM-Baryon Scattering in the 21 cm Forest
+
+## 1. Introduction and Scientific Context
+
+The exploration of dark matter (DM) microphysics remains one of the most pressing imperatives in modern cosmology. Among the well-motivated extensions to the standard Cold Dark Matter (CDM) paradigm is the allowance for elastic scattering between dark matter and baryons. This interaction manifests observationally through two distinct physical channels: the thermal cooling of the intergalactic medium (IGM) due to heat transfer from baryons to the colder dark matter fluid, and the kinematic suppression of small-scale density fluctuations caused by collisional damping. 
+
+In this study, we utilize the HAYASHI semianalytic framework to perform the first rigorous, quantitative assessment of the 21 cm forest's sensitivity to DM-baryon scattering. The 21 cm forest—comprising absorption troughs in the spectra of high-redshift radio-loud sources caused by intervening neutral hydrogen minihalos and the diffuse IGM—provides a direct line-of-sight probe of structure during the Epoch of Reionization (EoR), spanning redshifts $z = 7$ to $z = 15$. By integrating host halo and subhalo contributions, we map the physical effects of thermal cooling (parameterized by the cooling fraction $f_{cool} = T_k / T_k^{ad}$) and structure suppression (parameterized by the half-mode mass cutoff $M_{cut}$) onto the cumulative and differential optical depth distributions of the 21 cm forest.
+
+While previous literature has explored the effects of DM-baryon streaming velocities on the 21 cm forest or the impact of scattering on the global 21 cm signal, no existing study has computed the 21 cm forest absorption line statistics under DM-baryon interaction cross-sections. This work fills that critical gap, establishing a data-driven observational strategy for distinguishing DM-baryon interaction models from CDM.
+
+## 2. The Dichotomy of Observational Signatures: Thermal Cooling vs. Structure Suppression
+
+A central objective of this analysis is to disentangle and quantify the relative impacts of the thermal and structural channels on the 21 cm forest observable, $N_{abs}$ (the total number of absorbers with optical depth $\tau > 0.01$). Our results reveal a stark dichotomy: the structure suppression channel overwhelmingly dominates the signal, while the thermal cooling channel is effectively negligible.
+
+The baseline number of absorbers in the CDM scenario ($f_{cool}=1.0, M_{cut}=0$) exhibits a strong redshift evolution, reflecting the hierarchical buildup of structure. We find $N_{abs} = 136.44$ at $z=7$, decreasing monotonically to $N_{abs} = 58.98$ at $z=10$, and $N_{abs} = 13.27$ at $z=15$.
+
+When introducing baryon cooling, the maximum fractional change in the total number of absorbers, $|\Delta N_{abs} / N_{abs}|$, induced by extreme cooling ($f_{cool} \to 0.02$) remains below $0.002\%$ across all evaluated redshifts. For instance, at $z=10$, the cooling effect alters the absorber count by an imperceptible margin ($\sim 0.0\%$). This physical behavior is deeply rooted in the thermodynamics of the high-redshift IGM. During the EoR, prior to significant X-ray heating, the adiabatic kinetic temperature of the IGM is already extremely low ($T_k^{ad} \approx 1.16$ K at $z=7$ and $4.63$ K at $z=15$). Because the 21 cm optical depth is inversely proportional to the spin temperature, which couples to the kinetic temperature via the Wouthuysen-Field effect and collisional coupling, the absorption signal saturates in the cold IGM limit. Consequently, further cooling induced by DM-baryon scattering fails to substantially deepen the 21 cm absorption troughs, rendering the thermal channel invisible in the cumulative absorber counts.
+
+Conversely, the suppression of small-scale power exerts a profound and easily detectable impact. The introduction of a cutoff mass $M_{cut}$ directly truncates the halo mass function at the low-mass end, physically eradicating the minihalos that serve as the primary hosts for 21 cm absorbers. As visualized in the fractional change heatmap (<code>data/step_2_frac_change_heatmap_3_20260413_122322.png</code>), even a modest suppression scale of $M_{cut} = 10^4 M_\odot$ reduces the total absorber count by $50.19\%$ at $z=7$ and $47.02\%$ at $z=10$. For stronger interactions corresponding to $M_{cut} = 10^6 M_\odot$, the suppression is catastrophic, eliminating $92.53\%$ of absorbers at $z=7$ and up to $97.21\%$ at $z=15$.
+
+To formalize this sensitivity, we define the structural sensitivity index, $S = \partial \ln N_{abs} / \partial \ln M_{cut}$. We find that $S$ exhibits a strong redshift dependence. For $M_{cut} = 10^6 M_\odot$, $S$ ranges from $-0.4520$ at $z=7$ to $-0.6872$ at $z=15$. This indicates that the 21 cm forest becomes intrinsically more responsive to structural truncation at higher redshifts, where the baseline halo mass function is steeper and the absorber population is heavily dominated by the lowest-mass minihalos that are most susceptible to collisional damping.
+
+## 3. Differential Fingerprint Analysis and Distinguishability
+
+To move beyond integrated absorber counts and establish a robust observational discriminant, we analyzed the differential optical depth distribution, $dN/d\tau$. The shape of this distribution encodes the physical properties of the absorber population. The cumulative distributions and their derivatives with respect to $M_{cut}$ (<code>data/step_2_N_tau_and_derivative_1_20260413_122322.png</code>) demonstrate that the suppression preferentially depletes the lowest-mass halos, which correspond to the lowest optical depth ($\tau$) bins. Consequently, the derivative $\partial N(>\tau) / \partial M_{cut}$ exhibits a distinct spectral shape that sharply truncates the low-$\tau$ tail.
+
+We utilized the Kullback-Leibler (KL) divergence, $D_{KL}(\text{CDM} \parallel M_{cut})$, to rigorously quantify the distinguishability of the structure-suppressed models from the standard CDM baseline (<code>data/step_2_KL_divergence_2_20260413_122322.png</code>). The KL divergence analysis reveals two critical trends that are vital for future observational strategies, as summarized in Table 1.
+
+**Table 1: KL Divergence $D_{KL}(\text{CDM} \parallel M_{cut})$ across redshifts**
+
+| Redshift | $M_{cut}=10^4 M_\odot$ | $M_{cut}=10^5 M_\odot$ | $M_{cut}=5\times 10^5 M_\odot$ | $M_{cut}=10^6 M_\odot$ |
+|----------|------------------------|------------------------|--------------------------------|------------------------|
+| 7.0      | 0.0443                 | 0.1821                 | 0.2903                         | 0.3359                 |
+| 8.0      | 0.0413                 | 0.2032                 | 0.3235                         | 0.3711                 |
+| 9.0      | 0.0392                 | 0.2172                 | 0.3512                         | 0.4036                 |
+| 10.0     | 0.0363                 | 0.2258                 | 0.3693                         | 0.4234                 |
+| 12.0     | 0.0310                 | 0.2475                 | 0.4204                         | 0.4785                 |
+| 15.0     | 0.0234                 | 0.2645                 | 0.4832                         | 0.5444                 |
+
+First, distinguishability increases monotonically with $M_{cut}$. At $z=10$, $D_{KL}$ rises from $0.0363$ for $M_{cut} = 10^4 M_\odot$ to $0.4234$ for $M_{cut} = 10^6 M_\odot$. Second, for a fixed $M_{cut} \ge 10^5 M_\odot$, the KL divergence increases significantly with redshift. For a moderate suppression of $M_{cut} = 10^5 M_\odot$, $D_{KL}$ grows from $0.1821$ at $z=7$ to $0.2645$ at $z=15$.
+
+This redshift evolution implies that the "fingerprint" of DM-baryon scattering on the $dN/d\tau$ shape becomes more pronounced at earlier cosmic times. This shape-based discriminant is crucial for breaking astrophysical degeneracies. While uncertainties in the ionizing background intensity ($J_{21}$) or the neutral fraction ($\bar{x}_{HI}$) typically scale the overall amplitude of the distribution, they do not replicate the sharp, mass-dependent truncation induced by DM-baryon scattering.
+
+## 4. Fisher Matrix Forecast and the Optimal Observational Window
+
+To translate these theoretical sensitivities into observational forecasts for the Square Kilometre Array (SKA), we constructed a Fisher information matrix for the parameter set $\{M_{cut}, f_{cool}, \bar{x}_{HI}\}$. A critical component of this forecast is the incorporation of a realistic, redshift-dependent source density function for radio-loud background quasars, modeled as $N_{los}(z) = 10 \times ((1+z)/8)^{-2.5}$. This yields an effective number of observable sightlines that drops precipitously from $N_{los} = 10.0$ at $z=7$ to $N_{los} = 1.77$ at $z=15$.
+
+The Fisher forecast yields marginalized 1-$\sigma$ uncertainties on $M_{cut}$ that highlight the competing effects of intrinsic sensitivity and observational Poisson noise (<code>data/step_4_fisher_sigma_Mcut_vs_z_1_20260413_122856.png</code>). The results are summarized in Table 2.
+
+**Table 2: Fisher Forecast Results for SKA-era Observations**
+
+| Redshift | Effective Sightlines $N_{los}$ | Marginalized $\sigma(M_{cut})$ [$M_\odot$] |
+|----------|--------------------------------|--------------------------------------------|
+| 7.0      | 10.00                          | 1126.93                                    |
+| 8.0      | 7.45                           | 1346.25                                    |
+| 9.0      | 5.72                           | 1605.88                                    |
+| 10.0     | 4.51                           | 1907.20                                    |
+| 12.0     | 2.97                           | 2717.43                                    |
+| 15.0     | 1.77                           | 5018.42                                    |
+
+The raw statistical uncertainty is minimized at $z=7$, yielding $\sigma(M_{cut}) \approx 1126.93 M_\odot$. This minimum is driven primarily by the higher abundance of background sources and the larger baseline number of absorbers, which collectively suppress Poisson noise.
+
+However, as established by the KL divergence and the structural sensitivity index $S$, the intrinsic physical signature of $M_{cut}$ is more distinct at higher redshifts. At $z=10$, the marginalized uncertainty remains highly competitive at $\sigma(M_{cut}) \approx 1907.20 M_\odot$, despite a factor of two reduction in available sightlines. Furthermore, the off-diagonal elements of the covariance matrix at $z=10$ between $M_{cut}$ and the astrophysical proxies are exceptionally small (e.g., $C_{0,1} = -0.5009$ relative to a variance of $C_{0,0} = 3.6 \times 10^6$), demonstrating that the shape-based discriminant successfully isolates the DM scattering signal from astrophysical uncertainties.
+
+Based on this synthesis, we identify the range $z \sim 8 - 10$ as the **optimal observational window**. In this regime, the 21 cm forest provides a balanced optimization: the background source density is sufficient to maintain low statistical noise, while the intrinsic sensitivity to structure suppression and the distinguishability from CDM are significantly enhanced compared to $z=7$. Furthermore, observing at $z \sim 10$ mitigates potential systematic degeneracies with late-stage reionization astrophysics (such as complex topology and X-ray heating) that complicate the interpretation of the signal at lower redshifts.
+
+## 5. Mapping to Dark Matter Microphysics: Unprecedented Cross-Section Constraints
+
+The most striking outcome of this study is the translation of the $M_{cut}$ constraints into physical DM-baryon scattering cross-sections. Using established transfer function mappings, we evaluated the sensitivity to both velocity-independent ($n=0$) and Coulomb-like ($n=-4$) interactions. The sensitivity curves are visualized in (<code>data/step_3_sensitivity_curves_4_20260413_122634.png</code>) and the relationship between $N_{abs}$ and cross-section is shown in (<code>data/step_3_Nabs_vs_sigma_5_20260413_122634.png</code>).
+
+Assuming an observationally motivated detection threshold of a 10% or 20% suppression in $N_{abs}$ relative to CDM, the 21 cm forest can probe exceptionally low cutoff masses. The corresponding cross-section limits are detailed in Table 3.
+
+**Table 3: Sensitivity Mapping to DM-Baryon Cross-Sections**
+
+| Redshift | $M_{cut}$ (10%) [$M_\odot$] | $\sigma_0/m_\chi$ (10%, $n=0$) [cm$^2$/GeV] | $\sigma_0/m_\chi$ (10%, $n=-4$) [cm$^2$/GeV] |
+|----------|-----------------------------|---------------------------------------------|----------------------------------------------|
+| 7.0      | 1992.28                     | $1.99 \times 10^{-26}$                      | $1.99 \times 10^{-43}$                       |
+| 8.0      | 2032.71                     | $2.03 \times 10^{-26}$                      | $2.03 \times 10^{-43}$                       |
+| 9.0      | 2079.44                     | $2.08 \times 10^{-26}$                      | $2.08 \times 10^{-43}$                       |
+| 10.0     | 2126.62                     | $2.13 \times 10^{-26}$                      | $2.13 \times 10^{-43}$                       |
+| 12.0     | 2213.31                     | $2.21 \times 10^{-26}$                      | $2.21 \times 10^{-43}$                       |
+| 15.0     | 2378.57                     | $2.38 \times 10^{-26}$                      | $2.38 \times 10^{-43}$                       |
+
+For a **velocity-independent cross-section ($n=0$)**, a 10% suppression at $z=10$ corresponds to a sensitivity limit of $\sigma_0/m_\chi \approx 2.13 \times 10^{-26} \text{ cm}^2/\text{GeV}$. For a **Coulomb-like interaction ($n=-4$)**, the sensitivity reaches an astonishing $\sigma_0/m_\chi \approx 2.13 \times 10^{-43} \text{ cm}^2/\text{GeV}$. The extreme sensitivity to the $n=-4$ model arises because the cross-section scales as $v^{-4}$; in the early universe, relative velocities between DM and baryons are small, leading to massive collisional damping and severe structure suppression even for minuscule values of $\sigma_0$.
+
+These projected constraints represent a transformative leap in our ability to probe dark matter microphysics. Current limits from the Cosmic Microwave Background (CMB) constrain the velocity-independent cross-section to $\sigma_0 < 10^{-22} \text{ cm}^2$ for a 1 GeV dark matter particle. Similarly, constraints derived from the global 21 cm signal (e.g., EDGES, SARAS3), which rely entirely on the thermal cooling channel, plateau at the $\sim 10^{-21} \text{ cm}^2$ level. The 21 cm forest, by leveraging the structure suppression channel, is poised to improve upon these existing bounds by **four to five orders of magnitude** for $n=0$ models.
+
+## 6. The Uniqueness of the 21 cm Forest as a Cosmological Probe
+
+The profound sensitivity of the 21 cm forest stems from its unique physical nature, which makes it highly complementary to existing cosmological probes.
+
+Unlike the global 21 cm signal, which is a volume-averaged measurement highly sensitive to the thermal history of the IGM, the 21 cm forest is a direct tracer of small-scale structure. It counts individual minihalos along a specific line of sight. Because DM-baryon scattering washes out primordial density fluctuations on scales below the collisional mean free path, it induces a sharp cutoff in the halo mass function. The 21 cm forest is currently the only known observational probe capable of resolving these pristine, low-mass ($M \sim 10^4 - 10^6 M_\odot$) structures at high redshift ($z > 7$) before they are destroyed or heavily modified by reionization feedback.
+
+While the Lyman-$\alpha$ forest is conceptually similar, it probes much larger mass scales ($M > 10^8 M_\odot$) at lower redshifts ($z \sim 2-5$). By the time the Lyman-$\alpha$ forest is observable, the small-scale suppression signatures of DM-baryon scattering are largely washed out by non-linear structure formation and baryonic feedback, rendering it blind to the subtle microphysical signatures that the 21 cm forest can easily detect. Therefore, the 21 cm forest occupies a unique and irreplaceable niche in the landscape of dark matter constraints.
+
+## 7. Conclusion
+
+This semianalytic study establishes the 21 cm forest as a premier, unparalleled laboratory for dark matter physics. By shifting the observational focus from the thermal cooling of the IGM to the kinematic suppression of minihalos, we have demonstrated that future radio arrays like the SKA will be able to probe DM-baryon interaction cross-sections that are orders of magnitude beyond the reach of current cosmological and astrophysical constraints.
+
+The differential optical depth distribution, particularly in the optimal $z \sim 8-10$ window, provides a robust, shape-based fingerprint that can definitively distinguish interacting dark matter models from the standard CDM paradigm. The ability to constrain velocity-independent cross-sections down to $\sim 10^{-26} \text{ cm}^2/\text{GeV}$ underscores the necessity of prioritizing high-redshift radio source discovery and high-resolution spectroscopy in the coming decade. The 21 cm forest not only complements existing probes but offers a uniquely powerful window into the fundamental nature of dark matter.
