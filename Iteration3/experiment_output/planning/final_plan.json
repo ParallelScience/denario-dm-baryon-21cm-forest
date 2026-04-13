@@ -1,0 +1,66 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the CSV summary and JSON grid data.",
+                "Extract `cumulvec` and `tau_arr`, and compute the differential distribution $dN/d\tau$ via numerical differentiation.",
+                "Calculate the fractional change $\\Delta N_{abs} / N_{abs}$ relative to the CDM baseline ($f_{cool}=1, M_{cut}=0$).",
+                "Compute the structural sensitivity index $S = d \\ln N_{abs} / d \\ln M_{cut}$ at each redshift.",
+                "Tabulate and print the maximum fractional change due to cooling versus structure suppression.",
+                "Save all processed arrays and sensitivity metrics to a structured file for subsequent analysis."
+            ],
+            "sub_task": "Data processing and sensitivity quantification. Load the grid data, compute differential distributions, and quantify structural sensitivity.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Plot $N(>\\tau)$ for selected redshifts and parameter combinations.",
+                "Generate a subplot showing the derivative $dN(>\\tau)/dM_{cut}$ as a function of $\\tau$ to identify sensitive bins.",
+                "Compute and plot the Kullback-Leibler divergence between $dN/d\\tau$ at CDM and non-zero $M_{cut}$ values as a function of redshift.",
+                "Create a heatmap showing the fractional change in $N_{abs}$ as a function of $M_{cut}$ and $z$.",
+                "Save all plots as high-resolution PNG files."
+            ],
+            "sub_task": "Visualization and differential fingerprint analysis. Generate plots of the 21 cm forest signal and quantify distinguishability.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement the mapping functions for $\\sigma_0/m_\\chi$ based on the provided literature values for $n=0$ and $n=-4$ models.",
+                "Generate sensitivity curves showing detectable cross-sections for 10% and 20% changes in $N_{abs}$.",
+                "Save the resulting sensitivity data for the Fisher forecast step."
+            ],
+            "sub_task": "Cross-section mapping and sensitivity curve generation. Map $M_{cut}$ to physical DM-baryon parameters.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Incorporate a redshift-dependent source density $N_{los}(z) \\propto (1+z)^{-\\alpha}$ ($\\alpha \\approx 2-3$) and compute $N_{eff}(z) = N_{los}(z) \\cdot x_{HI}(z)$.",
+                "Construct the full Fisher information matrix $F_{ij}$ using the $\\tau$-bin sensitivities identified in Step 2.",
+                "Compute marginalized 1-$\\sigma$ uncertainties on $M_{cut}$ after marginalizing over $J_{21}$ and $x_{HI}$ with Gaussian priors.",
+                "Print the full Fisher matrix, its inverse, and the marginalized uncertainties to the console."
+            ],
+            "sub_task": "Fisher forecast construction. Perform a rigorous Fisher analysis for the joint parameter set {M_{cut}, J_{21}, x_{HI}}.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Interpret the sensitivity results, highlighting the dominance of the structure suppression channel.",
+                "Compare derived 21 cm forest constraints with CMB and global 21 cm signal limits.",
+                "Discuss the uniqueness of the 21 cm forest in probing structure suppression.",
+                "Identify the optimal redshift window for future observations based on the Fisher analysis."
+            ],
+            "sub_task": "Comparative analysis and optimal window identification. Synthesize results and compare with existing constraints.",
+            "sub_task_agent": "researcher"
+        },
+        {
+            "bullet_points": [
+                "Summarize findings, referencing exact fractional suppression values, marginalized $\\sigma(M_{cut})$, and $\\sigma_0/m_\\chi$ limits for $n=0$ and $n=-4$ models.",
+                "Provide a detailed discussion on the physical implications of the results.",
+                "Reference the generated plots and statistics to support the conclusions.",
+                "Finalize the report for the paper writer agents."
+            ],
+            "sub_task": "Final Results Report. Compile all quantitative findings, interpretations, and conclusions.",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}

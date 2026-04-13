@@ -1,0 +1,254 @@
+[
+  {
+    "name": "plan_setter",
+    "content": "",
+    "timestamp": "2026-04-13 12:19:07",
+    "cost": {
+      "Agent": [
+        "plan_setter"
+      ],
+      "Model": [
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "Cost": [
+        0.0017420000000000003
+      ],
+      "Prompt Tokens": [
+        6818
+      ],
+      "Completion Tokens": [
+        25
+      ],
+      "Total Tokens": [
+        6843
+      ]
+    }
+  },
+  {
+    "name": "_Group_Tool_Executor",
+    "content": "Plan constraints have been logged.",
+    "timestamp": "2026-04-13 12:19:07",
+    "cost": {
+      "Agent": [],
+      "Model": [],
+      "Cost": [],
+      "Prompt Tokens": [],
+      "Completion Tokens": [],
+      "Total Tokens": []
+    }
+  },
+  {
+    "name": "planner",
+    "content": "**Plan:**\n\n- Step 1:\n    * sub-task: Data processing and sensitivity quantification. Load the grid data, compute the fractional change in absorber counts relative to the CDM baseline, and identify the relative impact of structure suppression versus cooling.\n    * agent: engineer\n    * bullet points:\n        * Load the CSV summary and JSON grid data.\n        * Calculate the fractional change $\\Delta N_{abs} / N_{abs}$ for all grid points relative to the CDM baseline ($f_{cool}=1, M_{cut}=0$).\n        * Save the processed sensitivity metrics to a new CSV file for subsequent analysis.\n        * Print summary statistics of the sensitivity to $M_{cut}$ and $f_{cool}$ to the console.\n\n- Step 2:\n    * sub-task: Visualization of the 21 cm forest signal. Generate plots showing the cumulative distribution $N(>\\tau)$ and the sensitivity of the signal to DM-baryon parameters.\n    * agent: engineer\n    * bullet points:\n        * Plot $N(>\\tau)$ for selected redshifts and parameter combinations to illustrate the impact of $M_{cut}$ and $f_{cool}$.\n        * Create a heatmap or line plot showing the fractional change in $N_{abs}$ as a function of $M_{cut}$ and $z$.\n        * Save all plots as high-resolution PNG files.\n\n- Step 3:\n    * sub-task: Mapping to DM-baryon parameters and Fisher forecasting. Perform the mapping of $M_{cut}$ to $\\sigma_0/m_\\chi$ and estimate SKA sensitivity.\n    * agent: engineer\n    * bullet points:\n        * Implement the mapping functions for $\\sigma_0/m_\\chi$ based on the provided literature values.\n        * Perform a Fisher forecast for $N_{abs}$ assuming Poisson noise and $N_{los}=10$ sightlines.\n        * Calculate the 1-$\\sigma$ uncertainty on $\\sigma_0/m_\\chi$ across the redshift range.\n        * Save the resulting sensitivity curves and forecast data.\n\n- Step 4:\n    * sub-task: Comparative analysis and optimal window identification. Synthesize the results to compare with existing constraints and identify the optimal redshift.\n    * agent: researcher\n    * bullet points:\n        * Interpret the sensitivity results and the dominance of the structure suppression channel.\n        * Compare the derived 21 cm forest constraints with existing CMB and global 21 cm signal limits.\n        * Discuss the uniqueness of the 21 cm forest in probing the structure suppression channel.\n        * Identify the optimal redshift window for future observations.\n\n- Step 5:\n    * sub-task: Final Results Report. Compile all quantitative findings, interpretations, and conclusions into a comprehensive report.\n    * agent: researcher\n    * bullet points:\n        * Summarize the findings from the data analysis, Fisher forecast, and comparative study.\n        * Provide a detailed discussion on the physical implications of the results.\n        * Reference the generated plots and statistics to support the conclusions.\n        * Finalize the report for the paper writer agents.",
+    "timestamp": "2026-04-13 12:19:11",
+    "cost": {
+      "Agent": [
+        "planner"
+      ],
+      "Model": [
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "Cost": [
+        0.0036365
+      ],
+      "Prompt Tokens": [
+        10526
+      ],
+      "Completion Tokens": [
+        670
+      ],
+      "Total Tokens": [
+        11196
+      ]
+    }
+  },
+  {
+    "name": "planner_response_evaluator",
+    "content": "\n**PLAN**\n\n- Step 1:\n\t* sub-task: Data processing and sensitivity quantification. Load the grid data, compute the fractional change in absorber counts relative to the CDM baseline, and identify the relative impact of structure suppression versus cooling.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Load the CSV summary and JSON grid data.\n\t\t- Calculate the fractional change $\\Delta N_{abs} / N_{abs}$ for all grid points relative to the CDM baseline ($f_{cool}=1, M_{cut}=0$).\n\t\t- Save the processed sensitivity metrics to a new CSV file for subsequent analysis.\n\t\t- Print summary statistics of the sensitivity to $M_{cut}$ and $f_{cool}$ to the console.\n\n- Step 2:\n\t* sub-task: Visualization of the 21 cm forest signal. Generate plots showing the cumulative distribution $N(>\\tau)$ and the sensitivity of the signal to DM-baryon parameters.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Plot $N(>\\tau)$ for selected redshifts and parameter combinations to illustrate the impact of $M_{cut}$ and $f_{cool}$.\n\t\t- Create a heatmap or line plot showing the fractional change in $N_{abs}$ as a function of $M_{cut}$ and $z$.\n\t\t- Save all plots as high-resolution PNG files.\n\n- Step 3:\n\t* sub-task: Mapping to DM-baryon parameters and Fisher forecasting. Perform the mapping of $M_{cut}$ to $\\sigma_0/m_\\chi$ and estimate SKA sensitivity.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Implement the mapping functions for $\\sigma_0/m_\\chi$ based on the provided literature values.\n\t\t- Perform a Fisher forecast for $N_{abs}$ assuming Poisson noise and $N_{los}=10$ sightlines.\n\t\t- Calculate the 1-$\\sigma$ uncertainty on $\\sigma_0/m_\\chi$ across the redshift range.\n\t\t- Save the resulting sensitivity curves and forecast data.\n\n- Step 4:\n\t* sub-task: Comparative analysis and optimal window identification. Synthesize the results to compare with existing constraints and identify the optimal redshift.\n\t* agent in charge: researcher\n\n\t* instructions:\n\t\t- Interpret the sensitivity results and the dominance of the structure suppression channel.\n\t\t- Compare the derived 21 cm forest constraints with existing CMB and global 21 cm signal limits.\n\t\t- Discuss the uniqueness of the 21 cm forest in probing the structure suppression channel.\n\t\t- Identify the optimal redshift window for future observations.\n\n- Step 5:\n\t* sub-task: Final Results Report. Compile all quantitative findings, interpretations, and conclusions into a comprehensive report.\n\t* agent in charge: researcher\n\n\t* instructions:\n\t\t- Summarize the findings from the data analysis, Fisher forecast, and comparative study.\n\t\t- Provide a detailed discussion on the physical implications of the results.\n\t\t- Reference the generated plots and statistics to support the conclusions.\n\t\t- Finalize the report for the paper writer agents.\n\n        ",
+    "timestamp": "2026-04-13 12:19:15",
+    "cost": {
+      "Agent": [
+        "planner_response_evaluator"
+      ],
+      "Model": [
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "Cost": [
+        0.00131725
+      ],
+      "Prompt Tokens": [
+        733
+      ],
+      "Completion Tokens": [
+        756
+      ],
+      "Total Tokens": [
+        1489
+      ]
+    }
+  },
+  {
+    "name": "plan_recorder",
+    "content": "Plan has been logged.",
+    "timestamp": "2026-04-13 12:19:15",
+    "cost": {
+      "Agent": [],
+      "Model": [],
+      "Cost": [],
+      "Prompt Tokens": [],
+      "Completion Tokens": [],
+      "Total Tokens": []
+    }
+  },
+  {
+    "name": "plan_reviewer",
+    "content": "**Recommendations:**\n\n- Step 1 should explicitly instruct the engineer to also extract and process the `cumulvec` and `tau_arr` arrays from the JSON data (not just the CSV summary), computing the differential distribution `dN/dtau` by numerical differentiation of the cumulative curves, and saving these arrays alongside the sensitivity metrics \u2014 this processed data will be essential for the tau-bin sensitivity analysis in later steps.\n\n- Step 1 should additionally instruct the engineer to compute and print the \"structural sensitivity index\" defined as the logarithmic derivative of N_abs with respect to M_cut (i.e., d ln N_abs / d ln M_cut) at each redshift, and to separately tabulate the maximum fractional change due to cooling (varying f_cool at fixed M_cut=0) versus structure suppression (varying M_cut at fixed f_cool=1) to make the dominance comparison quantitative and explicit.\n\n- Step 2 should be expanded to include a subplot showing the derivative dN(>tau)/dM_cut as a function of tau at each redshift, identifying the specific tau bins where the signal is most sensitive to M_cut \u2014 this is the core \"differential fingerprint\" analysis described in the research plan and must be computed and visualized before the Fisher forecast in Step 3.\n\n- Step 2 should also instruct the engineer to compute and plot the Kullback-Leibler divergence between the dN/dtau distribution at CDM (M_cut=0) and each non-zero M_cut value, as a function of redshift, to provide a quantitative measure of distinguishability that directly feeds into the Fisher analysis.\n\n- Step 3 should be split into two distinct sub-tasks: first, the cross-section mapping and sensitivity curve generation (which is purely a data transformation task), and second, the Fisher forecast construction including the tau-bin weighting scheme and marginalized uncertainties \u2014 however, since the plan is already at 5 steps and the maximum is 8, this split is feasible and recommended to avoid overloading a single engineer step with two conceptually distinct computations.\n\n- Step 3 (or the new split step) must explicitly instruct the engineer to incorporate a realistic redshift-dependent source density function N_los(z) proportional to (1+z)^(-alpha) with alpha ~ 2-3, replacing the constant N_los=10 assumption, and to compute the effective number of sightlines N_eff(z) = N_los(z) times the neutral fraction x_HI(z) at each redshift \u2014 this is a key element of the research plan that is currently missing from the instructions.\n\n- Step 3 must explicitly instruct the engineer to construct the full Fisher information matrix for the joint parameter set {M_cut, J_21, x_HI} using the tau-bin sensitivities identified in Step 2, compute the marginalized (not just unmarginalized) 1-sigma uncertainty on M_cut after marginalizing over J_21 and x_HI with Gaussian priors, and print the full Fisher matrix and its inverse to the console \u2014 the current instructions only mention Poisson noise on N_abs_total which is a much simpler and less rigorous approach.\n\n- Step 4 (researcher) should be given explicit numerical values from the previous steps to reference, so the instructions should specify that the researcher must quote the exact fractional suppression values, the optimal redshift identified from the Fisher analysis, the marginalized sigma(M_cut) values, and the corresponding sigma_0/m_chi sensitivity limits for both n=0 and n=-4 interaction models \u2014 without this, the researcher agent may produce only qualitative discussion rather than the quantitative comparative analysis required.",
+    "timestamp": "2026-04-13 12:19:34",
+    "cost": {
+      "Agent": [
+        "plan_reviewer"
+      ],
+      "Model": [
+        "claude-sonnet-4-6"
+      ],
+      "Cost": [
+        0.053583
+      ],
+      "Prompt Tokens": [
+        13676
+      ],
+      "Completion Tokens": [
+        837
+      ],
+      "Total Tokens": [
+        14513
+      ]
+    }
+  },
+  {
+    "name": "reviewer_response_evaluator",
+    "content": "\n**Recommendations:**\n\nStep 1 should explicitly instruct the engineer to also extract and process the cumulvec and tau_arr arrays from the JSON data, computing the differential distribution dN/dtau by numerical differentiation of the cumulative curves, and saving these arrays alongside the sensitivity metrics.\n\nStep 1 should additionally instruct the engineer to compute and print the structural sensitivity index defined as the logarithmic derivative of N_abs with respect to M_cut at each redshift, and to separately tabulate the maximum fractional change due to cooling versus structure suppression.\n\nStep 2 should be expanded to include a subplot showing the derivative dN(>tau)/dM_cut as a function of tau at each redshift, identifying the specific tau bins where the signal is most sensitive to M_cut.\n\nStep 2 should also instruct the engineer to compute and plot the Kullback-Leibler divergence between the dN/dtau distribution at CDM and each non-zero M_cut value, as a function of redshift.\n\nStep 3 should be split into two distinct sub-tasks: first, the cross-section mapping and sensitivity curve generation, and second, the Fisher forecast construction including the tau-bin weighting scheme and marginalized uncertainties.\n\nStep 3 must explicitly instruct the engineer to incorporate a realistic redshift-dependent source density function N_los(z) proportional to (1+z)^(-alpha) with alpha ~ 2-3, and to compute the effective number of sightlines N_eff(z) = N_los(z) times the neutral fraction x_HI(z) at each redshift.\n\nStep 3 must explicitly instruct the engineer to construct the full Fisher information matrix for the joint parameter set {M_cut, J_21, x_HI} using the tau-bin sensitivities, compute the marginalized 1-sigma uncertainty on M_cut after marginalizing over J_21 and x_HI with Gaussian priors, and print the full Fisher matrix and its inverse.\n\nStep 4 should be given explicit numerical values from the previous steps to reference, specifying that the researcher must quote the exact fractional suppression values, the optimal redshift identified from the Fisher analysis, the marginalized sigma(M_cut) values, and the corresponding sigma_0/m_chi sensitivity limits for both n=0 and n=-4 interaction models.\n\n\n            ",
+    "timestamp": "2026-04-13 12:19:37",
+    "cost": {
+      "Agent": [
+        "reviewer_response_evaluator"
+      ],
+      "Model": [
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "Cost": [
+        0.0009580000000000001
+      ],
+      "Prompt Tokens": [
+        802
+      ],
+      "Completion Tokens": [
+        505
+      ],
+      "Total Tokens": [
+        1307
+      ]
+    }
+  },
+  {
+    "name": "review_recorder",
+    "content": "\nRecommendations have been logged.\nNumber of feedback rounds left: 0.\nNow, update the plan accordingly, planner!",
+    "timestamp": "2026-04-13 12:19:37",
+    "cost": {
+      "Agent": [],
+      "Model": [],
+      "Cost": [],
+      "Prompt Tokens": [],
+      "Completion Tokens": [],
+      "Total Tokens": []
+    }
+  },
+  {
+    "name": "planner",
+    "content": "**Plan:**\n\n- Step 1:\n    * sub-task: Data processing and sensitivity quantification. Load the grid data, compute differential distributions, and quantify structural sensitivity.\n    * agent: engineer\n    * bullet points:\n        * Load the CSV summary and JSON grid data.\n        * Extract `cumulvec` and `tau_arr`, and compute the differential distribution $dN/d\\tau$ via numerical differentiation.\n        * Calculate the fractional change $\\Delta N_{abs} / N_{abs}$ relative to the CDM baseline ($f_{cool}=1, M_{cut}=0$).\n        * Compute the structural sensitivity index $S = d \\ln N_{abs} / d \\ln M_{cut}$ at each redshift.\n        * Tabulate and print the maximum fractional change due to cooling versus structure suppression.\n        * Save all processed arrays and sensitivity metrics to a structured file for subsequent analysis.\n\n- Step 2:\n    * sub-task: Visualization and differential fingerprint analysis. Generate plots of the 21 cm forest signal and quantify distinguishability.\n    * agent: engineer\n    * bullet points:\n        * Plot $N(>\\tau)$ for selected redshifts and parameter combinations.\n        * Generate a subplot showing the derivative $dN(>\\tau)/dM_{cut}$ as a function of $\\tau$ to identify sensitive bins.\n        * Compute and plot the Kullback-Leibler divergence between $dN/d\\tau$ at CDM and non-zero $M_{cut}$ values as a function of redshift.\n        * Create a heatmap showing the fractional change in $N_{abs}$ as a function of $M_{cut}$ and $z$.\n        * Save all plots as high-resolution PNG files.\n\n- Step 3:\n    * sub-task: Cross-section mapping and sensitivity curve generation. Map $M_{cut}$ to physical DM-baryon parameters.\n    * agent: engineer\n    * bullet points:\n        * Implement the mapping functions for $\\sigma_0/m_\\chi$ based on the provided literature values for $n=0$ and $n=-4$ models.\n        * Generate sensitivity curves showing detectable cross-sections for 10% and 20% changes in $N_{abs}$.\n        * Save the resulting sensitivity data for the Fisher forecast step.\n\n- Step 4:\n    * sub-task: Fisher forecast construction. Perform a rigorous Fisher analysis for the joint parameter set $\\{M_{cut}, J_{21}, x_{HI}\\}$.\n    * agent: engineer\n    * bullet points:\n        * Incorporate a redshift-dependent source density $N_{los}(z) \\propto (1+z)^{-\\alpha}$ ($\\alpha \\approx 2-3$) and compute $N_{eff}(z) = N_{los}(z) \\cdot x_{HI}(z)$.\n        * Construct the full Fisher information matrix $F_{ij}$ using the $\\tau$-bin sensitivities identified in Step 2.\n        * Compute marginalized 1-$\\sigma$ uncertainties on $M_{cut}$ after marginalizing over $J_{21}$ and $x_{HI}$ with Gaussian priors.\n        * Print the full Fisher matrix, its inverse, and the marginalized uncertainties to the console.\n\n- Step 5:\n    * sub-task: Comparative analysis and optimal window identification. Synthesize results and compare with existing constraints.\n    * agent: researcher\n    * bullet points:\n        * Interpret the sensitivity results, highlighting the dominance of the structure suppression channel.\n        * Compare derived 21 cm forest constraints with CMB and global 21 cm signal limits.\n        * Discuss the uniqueness of the 21 cm forest in probing structure suppression.\n        * Identify the optimal redshift window for future observations based on the Fisher analysis.\n\n- Step 6:\n    * sub-task: Final Results Report. Compile all quantitative findings, interpretations, and conclusions.\n    * agent: researcher\n    * bullet points:\n        * Summarize findings, referencing exact fractional suppression values, marginalized $\\sigma(M_{cut})$, and $\\sigma_0/m_\\chi$ limits for $n=0$ and $n=-4$ models.\n        * Provide a detailed discussion on the physical implications of the results.\n        * Reference the generated plots and statistics to support the conclusions.\n        * Finalize the report for the paper writer agents.",
+    "timestamp": "2026-04-13 12:19:42",
+    "cost": {
+      "Agent": [
+        "planner",
+        "planner"
+      ],
+      "Model": [
+        "gemini-3.1-flash-lite-preview",
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "Cost": [
+        0.0036365,
+        0.008451750000000001
+      ],
+      "Prompt Tokens": [
+        10526,
+        24165
+      ],
+      "Completion Tokens": [
+        670,
+        1607
+      ],
+      "Total Tokens": [
+        11196,
+        25772
+      ]
+    }
+  },
+  {
+    "name": "planner_response_evaluator",
+    "content": "\n**PLAN**\n\n- Step 1:\n\t* sub-task: Data processing and sensitivity quantification. Load the grid data, compute differential distributions, and quantify structural sensitivity.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Load the CSV summary and JSON grid data.\n\t\t- Extract `cumulvec` and `tau_arr`, and compute the differential distribution $dN/d\tau$ via numerical differentiation.\n\t\t- Calculate the fractional change $\\Delta N_{abs} / N_{abs}$ relative to the CDM baseline ($f_{cool}=1, M_{cut}=0$).\n\t\t- Compute the structural sensitivity index $S = d \\ln N_{abs} / d \\ln M_{cut}$ at each redshift.\n\t\t- Tabulate and print the maximum fractional change due to cooling versus structure suppression.\n\t\t- Save all processed arrays and sensitivity metrics to a structured file for subsequent analysis.\n\n- Step 2:\n\t* sub-task: Visualization and differential fingerprint analysis. Generate plots of the 21 cm forest signal and quantify distinguishability.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Plot $N(>\\tau)$ for selected redshifts and parameter combinations.\n\t\t- Generate a subplot showing the derivative $dN(>\\tau)/dM_{cut}$ as a function of $\\tau$ to identify sensitive bins.\n\t\t- Compute and plot the Kullback-Leibler divergence between $dN/d\\tau$ at CDM and non-zero $M_{cut}$ values as a function of redshift.\n\t\t- Create a heatmap showing the fractional change in $N_{abs}$ as a function of $M_{cut}$ and $z$.\n\t\t- Save all plots as high-resolution PNG files.\n\n- Step 3:\n\t* sub-task: Cross-section mapping and sensitivity curve generation. Map $M_{cut}$ to physical DM-baryon parameters.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Implement the mapping functions for $\\sigma_0/m_\\chi$ based on the provided literature values for $n=0$ and $n=-4$ models.\n\t\t- Generate sensitivity curves showing detectable cross-sections for 10% and 20% changes in $N_{abs}$.\n\t\t- Save the resulting sensitivity data for the Fisher forecast step.\n\n- Step 4:\n\t* sub-task: Fisher forecast construction. Perform a rigorous Fisher analysis for the joint parameter set {M_{cut}, J_{21}, x_{HI}}.\n\t* agent in charge: engineer\n\n\t* instructions:\n\t\t- Incorporate a redshift-dependent source density $N_{los}(z) \\propto (1+z)^{-\\alpha}$ ($\\alpha \\approx 2-3$) and compute $N_{eff}(z) = N_{los}(z) \\cdot x_{HI}(z)$.\n\t\t- Construct the full Fisher information matrix $F_{ij}$ using the $\\tau$-bin sensitivities identified in Step 2.\n\t\t- Compute marginalized 1-$\\sigma$ uncertainties on $M_{cut}$ after marginalizing over $J_{21}$ and $x_{HI}$ with Gaussian priors.\n\t\t- Print the full Fisher matrix, its inverse, and the marginalized uncertainties to the console.\n\n- Step 5:\n\t* sub-task: Comparative analysis and optimal window identification. Synthesize results and compare with existing constraints.\n\t* agent in charge: researcher\n\n\t* instructions:\n\t\t- Interpret the sensitivity results, highlighting the dominance of the structure suppression channel.\n\t\t- Compare derived 21 cm forest constraints with CMB and global 21 cm signal limits.\n\t\t- Discuss the uniqueness of the 21 cm forest in probing structure suppression.\n\t\t- Identify the optimal redshift window for future observations based on the Fisher analysis.\n\n- Step 6:\n\t* sub-task: Final Results Report. Compile all quantitative findings, interpretations, and conclusions.\n\t* agent in charge: researcher\n\n\t* instructions:\n\t\t- Summarize findings, referencing exact fractional suppression values, marginalized $\\sigma(M_{cut})$, and $\\sigma_0/m_\\chi$ limits for $n=0$ and $n=-4$ models.\n\t\t- Provide a detailed discussion on the physical implications of the results.\n\t\t- Reference the generated plots and statistics to support the conclusions.\n\t\t- Finalize the report for the paper writer agents.\n\n        ",
+    "timestamp": "2026-04-13 12:19:47",
+    "cost": {
+      "Agent": [
+        "planner_response_evaluator",
+        "planner_response_evaluator"
+      ],
+      "Model": [
+        "gemini-3.1-flash-lite-preview",
+        "gemini-3.1-flash-lite-preview"
+      ],
+      "Cost": [
+        0.00131725,
+        0.00312725
+      ],
+      "Prompt Tokens": [
+        733,
+        1733
+      ],
+      "Completion Tokens": [
+        756,
+        1796
+      ],
+      "Total Tokens": [
+        1489,
+        3529
+      ]
+    }
+  },
+  {
+    "name": "plan_recorder",
+    "content": "Plan recorded as final. Planning stage complete.",
+    "timestamp": "2026-04-13 12:19:47",
+    "cost": {
+      "Agent": [],
+      "Model": [],
+      "Cost": [],
+      "Prompt Tokens": [],
+      "Completion Tokens": [],
+      "Total Tokens": []
+    }
+  },
+  {
+    "name": "terminator",
+    "content": "TERMINATE",
+    "timestamp": "2026-04-13 12:19:47",
+    "cost": {
+      "Agent": [],
+      "Model": [],
+      "Cost": [],
+      "Prompt Tokens": [],
+      "Completion Tokens": [],
+      "Total Tokens": []
+    }
+  }
+]
