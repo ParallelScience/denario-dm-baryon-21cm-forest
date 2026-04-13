@@ -1,0 +1,1 @@
+find /home/node/work/projects/dm_baryon_21cm_forest/data -name "*.csv" -o -name "*.json"

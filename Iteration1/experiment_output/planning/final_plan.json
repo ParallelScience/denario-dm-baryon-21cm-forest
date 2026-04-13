@@ -1,0 +1,65 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the hayashi_grid.json, hayashi_grid_summary.csv, and Ngtau_z10_Mcut0.npz datasets.",
+                "Validate the CDM baseline ($f_{cool}=1.0, M_{cut}=0$) against summary statistics and cross-check Ngtau_z10_Mcut0.npz against the JSON grid at $z=10$.",
+                "Print the CDM baseline $N_{abs}$ values for all redshifts ($z=7–15$) to the console.",
+                "Compute $dN/d\tau$ from cumulvec and quantify the fractional difference in $N_{abs}$ between $f_{cool}=1.0$ and $f_{cool}=0.02$ at each redshift to numerically confirm the saturation limit.",
+                "Save processed differential distributions and validation plots to the database."
+            ],
+            "sub_task": "Baseline Validation and Saturation Limit Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the fractional change $\\Delta N_{abs}/N_{abs}$ as a function of $M_{cut}$ and $f_{cool}$ across all redshifts.",
+                "Produce and print a full numerical table/heatmap of fractional sensitivity indexed by $(z, M_{cut})$ and $(z, f_{cool})$ to document the dominance of $M_{cut}$.",
+                "Compute and print shape similarity metrics (e.g., cosine similarity) between $dN/d\tau$ vectors to quantify the degeneracy between $M_{cut}$ and $z$.",
+                "Save sensitivity matrices and summary statistics to the database."
+            ],
+            "sub_task": "Sensitivity Quantification and Nuisance Parameter Degeneracy",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Construct a Fisher matrix $F_{ij}$ for parameters $\\{M_{cut}, \\text{normalization}\\}$ (nuisance) using $dN/d\tau$, performed separately for each redshift $z \\in \\{7, 8, 9, 10, 12, 15\\}$.",
+                "Incorporate Poisson noise $\\sigma = \\sqrt{N_{obs}(z) \\cdot \\Delta\\tau}$ assuming $N_{sightlines} = 10$.",
+                "Print the 1-$\\sigma$ $M_{cut}$ constraint at each redshift to the console.",
+                "Compute and save the Fisher-forecasted minimum detectable $M_{cut}$ as a function of $N_{sightlines}$ (1–100) and plot $\\sigma(M_{cut})$ vs. $N_{sightlines}$ for the optimal redshift."
+            ],
+            "sub_task": "Fisher Forecast for SKA Sensitivity",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Tabulate and print the mapping between $M_{cut} \\in \\{0, 10^4, 10^5, 5\\cdot 10^5, 10^6\\} M_\\odot$ and $\\sigma_0/m_\\chi$ for $n=0$ and $n=-4$ interactions ($m_\\chi = 1$ GeV).",
+                "Generate sensitivity curves in the $\\sigma_0/m_\\chi$ vs. $z$ plane.",
+                "Compare results with existing CMB, global 21 cm, and Lyman-$\\alpha$ forest constraints.",
+                "Save comparative plots and mapping data to the database."
+            ],
+            "sub_task": "Cross-Section Mapping and Comparative Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the per-$\\tau$-bin Fisher information contribution and identify the $\\tau$ range contributing $>50\\%$ of total information.",
+                "Identify the optimal redshift $z_{opt}$ for SKA observations based on SNR evolution.",
+                "Generate a summary plot defining the \"optimal observational window\" (in $\\tau$ and $z$) for future surveys.",
+                "Save final summary figures and data tables."
+            ],
+            "sub_task": "Optimal Observational Strategy Synthesis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize findings into a comprehensive Results section, referencing all generated plots and numerical tables.",
+                "Interpret the dominance of structure suppression over cooling and the implications for DM-baryon scattering models.",
+                "Discuss the uniqueness of the 21 cm forest in probing the structure suppression channel.",
+                "Provide a final assessment of the optimal observational strategy for SKA-era experiments, supported by the quantitative Fisher forecasts and sensitivity analyses."
+            ],
+            "sub_task": "Results Synthesis and Paper Drafting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
