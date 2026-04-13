@@ -1,0 +1,87 @@
+
+###### PROMPT BEGINS ########
+Human: You are a scientific paper classifier. Your task is to determine the most appropriate top-level arXiv archive for the following paper.
+
+**Paper Title:** Mapping the Optimal Sensitivity of the 21 cm Forest to Dark Matter-Baryon Scattering
+
+**Abstract:** Elastic scattering between dark matter and baryons can suppress the formation of small-scale structure, offering a powerful observational test of dark matter microphysics. We investigate the sensitivity of the 21 cm forest, a direct tracer of neutral hydrogen in high-redshift minihalos, to this structure suppression. Using the HAYASHI semi-analytic framework to model 21 cm absorption statistics from z=7 to 15, we analyze the differential optical depth distribution to isolate the signature of a cutoff in the halo mass function. Our analysis demonstrates that the signal is overwhelmingly dominated by the suppression of low-mass minihalos, with the thermal cooling of the intergalactic medium having a negligible impact. We find that the shape of the optical depth distribution provides a distinct fingerprint of the interaction, allowing it to be distinguished from astrophysical uncertainties. Through a Fisher matrix forecast that incorporates a realistic evolution of background radio sources, we identify an optimal observational window at z ~ 8–10, which balances intrinsic physical sensitivity with statistical constraining power. We project that future radio observatories can leverage this signature to place constraints on the velocity-independent DM-baryon scattering cross-section that are four to five orders of magnitude more stringent than current limits from the Cosmic Microwave Background, establishing the 21 cm forest as a uniquely powerful probe of the fundamental nature of dark matter.
+
+**Archives:**
+- astro-ph: Astrophysics — cosmology, galaxies, stellar physics, planetary science, high-energy astrophysics, instrumentation
+- cond-mat: Condensed Matter — materials science, superconductivity, quantum gases, soft matter, statistical mechanics
+- cs: Computer Science — AI, machine learning, NLP, computer vision, algorithms, networking, security, software
+- econ: Economics — econometrics, general economics, theoretical economics
+- eess: Electrical Engineering and Systems Science — signal processing, image/video processing, audio/speech, control
+- gr-qc: General Relativity and Quantum Cosmology — gravitational physics, gravitational waves, black holes
+- hep-ex: High Energy Physics - Experiment — particle physics experiments, collider results
+- hep-lat: High Energy Physics - Lattice — lattice field theory, lattice QCD
+- hep-ph: High Energy Physics - Phenomenology — theoretical particle physics connected to experiment
+- hep-th: High Energy Physics - Theory — string theory, quantum field theory, supersymmetry
+- math: Mathematics — algebra, geometry, topology, analysis, probability, number theory, optimization
+- math-ph: Mathematical Physics — mathematical methods for physics problems
+- nlin: Nonlinear Sciences — chaos, pattern formation, solitons, integrable systems, self-organization
+- nucl-ex: Nuclear Experiment — experimental nuclear physics
+- nucl-th: Nuclear Theory — nuclear structure theory, hadron models, neutron stars
+- physics: Physics (General) — classical, computational, fluid dynamics, optics, plasma, applied, biological, chemical physics
+- q-bio: Quantitative Biology — biomolecules, genomics, neuroscience, populations, quantitative methods
+- q-fin: Quantitative Finance — computational finance, portfolio management, risk, pricing, trading
+- quant-ph: Quantum Physics — quantum information, computation, entanglement, foundations, optics
+- stat: Statistics — methodology, applications, machine learning (with statistical grounding), computation
+
+Select the single most appropriate archive for this paper. If the paper spans multiple fields, choose the one where the paper makes its primary contribution.
+
+###### PROMPT ENDS ########
+
+archive='astro-ph' justification='The paper focuses on cosmological structure formation, 21 cm cosmology, and dark matter constraints, which are core topics within the astrophysics and cosmology community.'
+###### PROMPT BEGINS ########
+Human: You are a scientific paper classifier. You have already determined that this paper belongs to the **astro-ph** archive on arXiv. Now select the specific subcategory.
+
+**Paper Title:** Mapping the Optimal Sensitivity of the 21 cm Forest to Dark Matter-Baryon Scattering
+
+**Abstract:** Elastic scattering between dark matter and baryons can suppress the formation of small-scale structure, offering a powerful observational test of dark matter microphysics. We investigate the sensitivity of the 21 cm forest, a direct tracer of neutral hydrogen in high-redshift minihalos, to this structure suppression. Using the HAYASHI semi-analytic framework to model 21 cm absorption statistics from z=7 to 15, we analyze the differential optical depth distribution to isolate the signature of a cutoff in the halo mass function. Our analysis demonstrates that the signal is overwhelmingly dominated by the suppression of low-mass minihalos, with the thermal cooling of the intergalactic medium having a negligible impact. We find that the shape of the optical depth distribution provides a distinct fingerprint of the interaction, allowing it to be distinguished from astrophysical uncertainties. Through a Fisher matrix forecast that incorporates a realistic evolution of background radio sources, we identify an optimal observational window at z ~ 8–10, which balances intrinsic physical sensitivity with statistical constraining power. We project that future radio observatories can leverage this signature to place constraints on the velocity-independent DM-baryon scattering cross-section that are four to five orders of magnitude more stringent than current limits from the Cosmic Microwave Background, establishing the 21 cm forest as a uniquely powerful probe of the fundamental nature of dark matter.
+
+**Methods (if available):** \subsection{Semi-analytic framework}
+
+We model the statistics of the 21 cm forest using the \texttt{HAYASHI} semi-analytic framework. This code computes the distribution of neutral hydrogen absorbers along random lines of sight through the high-redshift universe, covering a redshift range from $z=7$ to $z=15$. The model integrates contributions from both the diffuse intergalactic medium (IGM) and the dense gas residing within gravitationally bound minihalos, including both host halos and their subhalos. For each line of sight, the framework calculates the 21 cm optical depth, $\tau$, which is inversely proportional to the gas spin temperature. This allows us to generate statistical distributions of absorption features, such as the cumulative number of absorbers above a certain optical depth, $N(>\tau)$, and the differential optical depth distribution, $dN/d\tau$.
+
+\subsection{Modeling dark matter-baryon scattering}
+
+We incorporate the effects of elastic scattering between dark matter and baryons through two primary physical channels. The first and most significant channel is the suppression of small-scale structure. Momentum exchange between the two fluids damps primordial density fluctuations, leading to a cutoff in the matter power spectrum. We model this effect by introducing a sharp cutoff in the halo mass function below a characteristic mass, $M_{cut}$. Halos with masses $M < M_{cut}$ are assumed not to form, directly reducing the population of low-mass minihalos that dominate the 21 cm forest signal.
+
+The second channel is the thermal coupling between the two fluids. Heat transfer from the relatively warmer baryons to the colder dark matter can cool the IGM gas beyond the standard adiabatic expansion. We parameterize this effect with a cooling fraction, $f_{cool} = T_k / T_k^{ad}$, where $T_k$ is the kinetic temperature of the gas in the presence of scattering and $T_k^{ad}$ is the temperature from adiabatic cooling alone. Our analysis found the impact of this thermal channel on the 21 cm forest statistics to be negligible.
+
+The cutoff mass $M_{cut}$ is directly related to the underlying dark matter-baryon scattering cross-section, $\sigma$. We consider models where the cross-section has a power-law dependence on the relative velocity $v$, such that $\sigma = \sigma_0 v^n$. Our analysis focuses on mapping constraints on $M_{cut}$ to the cross-section normalization $\sigma_0$ for two specific cases: a velocity-independent cross-section ($n=0$) and a Coulomb-like interaction ($n=-4$).
+
+\subsection{Statistical analysis and evaluation metrics}
+
+Our analysis focuses on the differential optical depth distribution, $dN/d\tau$, as the primary observable. This distribution's shape is sensitive to the underlying population of absorbers. The suppression of low-mass halos due to dark matter-baryon scattering preferentially removes absorbers with low optical depth, imprinting a distinct "fingerprint" on the shape of the $dN/d\tau$ distribution.
+
+To quantify the ability to distinguish a model with structure suppression from the standard $\Lambda$CDM scenario, we employ the Kullback-Leibler (KL) divergence. The KL divergence, $D_{KL}(\text{CDM} \parallel M_{cut})$, measures the information gain when updating from a prior CDM distribution to a posterior distribution that includes a cutoff mass $M_{cut}$. A larger value of $D_{KL}$ indicates that the two distributions are more easily distinguishable, signifying greater intrinsic sensitivity to the effects of dark matter scattering.
+
+\subsection{Fisher forecast methodology}
+
+To project the observational capabilities of future radio observatories such as the Square Kilometre Array (SKA), we perform a Fisher matrix forecast. The Fisher matrix, $F_{ij}$, quantifies the amount of information that an observable contains about a set of model parameters. We construct the matrix for the parameter set $\{\theta_i\} = \{M_{cut}, f_{cool}, \bar{x}_{HI}\}$, where $\bar{x}_{HI}$ is the mean neutral hydrogen fraction. The elements of the matrix are calculated as:
+\begin{equation}
+F_{ij} = \sum_{k} \frac{1}{N_k} \frac{\partial N_k}{\partial \theta_i} \frac{\partial N_k}{\partial \theta_j}
+\end{equation}
+where the sum is over bins of optical depth $\tau$, and $N_k$ is the number of absorbers in the $k$-th bin.
+
+A crucial element of our forecast is a realistic model for the number of available background radio sources, which we assume evolves with redshift. The number of lines of sight, $N_{los}$, is modeled as a power law:
+\begin{equation}
+N_{los}(z) = 10 \left( \frac{1+z}{8} \right)^{-2.5}
+\end{equation}
+This accounts for the increasing scarcity of bright radio-loud quasars at higher redshifts. The statistical uncertainty on the number of absorbers in each bin is assumed to be Poissonian, scaling with $1/\sqrt{N_{los}}$. By inverting the Fisher matrix, we obtain the covariance matrix, from which we extract the marginalized 1-$\sigma$ uncertainty on our parameter of interest, $\sigma(M_{cut})$. This forecast allows us to identify the optimal observational redshift window that balances intrinsic physical sensitivity with statistical constraining power.
+
+**Available subcategories in astro-ph:**
+- astro-ph.CO: Cosmology and Nongalactic Astrophysics — Phenomenology of early universe, cosmic microwave background, cosmological parameters, primordial element abundances, extragalactic distance scale, large-scale structure of the universe, dark energy and dark matter.
+- astro-ph.EP: Earth and Planetary Astrophysics — Interplanetary medium, planetary physics, planetary astrobiology, extrasolar planets, solar system formation and evolution, comets, asteroids, meteors.
+- astro-ph.GA: Astrophysics of Galaxies — Phenomena pertaining to galaxies or the Milky Way. Star clusters, HII regions, interstellar medium, molecular clouds, galactic structure, formation and evolution.
+- astro-ph.HE: High Energy Astrophysical Phenomena — Cosmic ray production, acceleration, propagation, detection. Gamma ray astronomy. Supernovae, neutron stars, pulsars, black holes, X-ray binaries, active galactic nuclei.
+- astro-ph.IM: Instrumentation and Methods for Astrophysics — Detector and telescope design, experiment proposals, laboratory astrophysics, data analysis methods, statistical methods, software and simulations.
+- astro-ph.SR: Solar and Stellar Astrophysics — White dwarfs, brown dwarfs, cataclysmic variables. Star formation and protostellar systems. Stellar structure, evolution, nucleosynthesis, atmospheres. The Sun.
+
+Select one primary subcategory and up to 3 secondary subcategories (from any archive) that also apply. The primary must be from the list above. Secondary categories may come from any arXiv category if the paper is interdisciplinary.
+
+###### PROMPT ENDS ########
+
+primary_category='astro-ph.CO' secondary_categories=['astro-ph.GA', 'astro-ph.IM'] justification='The paper focuses on dark matter-baryon scattering and its impact on the matter power spectrum and halo mass function, which are core topics in cosmology (astro-ph.CO). It also discusses the 21 cm forest in high-redshift minihalos (astro-ph.GA) and uses Fisher matrix forecasting and semi-analytic modeling techniques (astro-ph.IM).'

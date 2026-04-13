@@ -1,0 +1,7 @@
+Classifier: Step 1 — Determining archive...
+  Archive: astro-ph — The paper focuses on cosmological structure formation, 21 cm cosmology, and dark matter constraints, which are core topics within the astrophysics and cosmology community.
+Classifier: Step 2 — Determining subcategory within 'astro-ph'...
+  Primary: astro-ph.CO
+  Secondary: astro-ph.GA, astro-ph.IM
+  Justification: The paper focuses on dark matter-baryon scattering and its impact on the matter power spectrum and halo mass function, which are core topics in cosmology (astro-ph.CO). It also discusses the 21 cm forest in high-redshift minihalos (astro-ph.GA) and uses Fisher matrix forecasting and semi-analytic modeling techniques (astro-ph.IM).
+Classification completed in 0 min 3 sec. Cost: $0.0000

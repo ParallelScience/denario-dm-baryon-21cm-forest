@@ -1,0 +1,8 @@
+{
+  "primary_category": "astro-ph.CO",
+  "secondary_categories": [
+    "astro-ph.GA",
+    "astro-ph.IM"
+  ],
+  "justification": "The paper focuses on dark matter-baryon scattering and its impact on the matter power spectrum and halo mass function, which are core topics in cosmology (astro-ph.CO). It also discusses the 21 cm forest in high-redshift minihalos (astro-ph.GA) and uses Fisher matrix forecasting and semi-analytic modeling techniques (astro-ph.IM)."
+}
