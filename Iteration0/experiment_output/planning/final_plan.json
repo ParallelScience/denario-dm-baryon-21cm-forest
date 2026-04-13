@@ -1,0 +1,69 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the hayashi_grid_summary.csv and hayashi_grid.json files.",
+                "Print all CDM baseline values (f_cool=1.0, M_cut=0) of Nabs_total at each redshift (z=7, 8, 9, 10, 12, 15) alongside the corresponding Tk_cdm values.",
+                "Verify that the cumulvec arrays in the JSON are monotonically decreasing and span the expected tau range (~0.001 to ~0.5).",
+                "Save a summary of the validated data to a new file for subsequent steps."
+            ],
+            "sub_task": "Data Preprocessing and Baseline Validation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Convert the cumulative distribution cumulvec into the differential distribution dN/dtau via finite differences on the log-spaced tau_arr (dN/dtau = -d(cumulvec)/dtau).",
+                "Compute the derivatives partial (dN/dtau) / partial M_cut and partial (dN/dtau) / partial f_cool using finite differences between adjacent grid points.",
+                "Print the ratio of the maximum absolute derivative values to quantify the dominance of structure suppression over cooling at each redshift and tau bin.",
+                "Save the differential distributions and derivative results to disk."
+            ],
+            "sub_task": "Sensitivity Analysis of the Forest Spectrum",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement physical mapping functions to convert M_cut and f_cool into cross-section values sigma_0/m_chi using power-law interpolation in log-log space.",
+                "Incorporate the z-dependence of the relative velocity for the n=-4 (Coulomb-like) case, where v_rel ~ (1+z)^(1/2), and print the exact scaling relation used for each redshift.",
+                "Save the mapped cross-section data for Fisher analysis."
+            ],
+            "sub_task": "Redshift-Dependent Parameter Mapping",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Perform a Fisher matrix analysis using the differential distribution dN/dtau to estimate the sensitivity of SKA-era observations to M_cut.",
+                "Assume a Poisson noise model sigma(dN/dtau) = sqrt(N_obs) / Delta_tau with N_sightlines = 10.",
+                "Compute Fisher information for both the total absorber count N_abs (scalar) and the full differential distribution dN/dtau (vector), and print the ratio of the two.",
+                "Calculate the 1-sigma and 2-sigma confidence intervals for sigma_0/m_chi at each redshift and save the results."
+            ],
+            "sub_task": "Fisher Information Forecast for SKA",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Generate multi-panel plots: (a) N(>tau) cumulative distributions for all M_cut at z=10; (b) dN/dtau curves for varying M_cut at z=10; (c) fractional change in N_abs vs z and M_cut; (d) Fisher-forecasted sensitivity contours in the sigma_0/m_chi vs. z plane; (e) Fisher information vs. redshift and signal-to-noise ratio per tau bin.",
+                "Identify the optimal redshift and propose an optimized tau-bin weighting scheme based on the Fisher analysis.",
+                "Save all plots as high-resolution PNG files."
+            ],
+            "sub_task": "Visualization and Observational Strategy Optimization",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compile existing constraints from CMB (Xu et al. 2018), global 21 cm signal (EDGES/SARAS3), and Lyman-alpha forest data.",
+                "Quantitatively compare the 21 cm forest sensitivity (from Step 4) with existing bounds using the ratio sigma_forest / sigma_CMB.",
+                "Synthesize the findings to emphasize the unique sensitivity of the 21 cm forest to the structure suppression channel and discuss the impact of astrophysical nuisance parameters."
+            ],
+            "sub_task": "Comparative Analysis and Synthesis",
+            "sub_task_agent": "researcher"
+        },
+        {
+            "bullet_points": [
+                "Write the full Results section of the paper, structured into: (1) baseline validation and CDM predictions, (2) differential spectrum sensitivity and dominance of structure suppression, (3) parameter mapping and cross-section sensitivity curves, (4) Fisher forecasts and optimal observational strategy, and (5) comparison with existing constraints.",
+                "Integrate all quantitative results, interpretations of the plots, and key statistics generated in previous steps, ensuring all numerical values are explicitly quoted with physical units."
+            ],
+            "sub_task": "Final Results Report",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
